@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { HTTP_INTERCEPTORS, HttpClientModule, provideHttpClient } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './views/login/login.component';
@@ -11,9 +11,10 @@ import { DashboardComponent } from './views/dashboard/dashboard.component';
 import { ProjectCardComponent } from './views/dashboard/components/project-card/project-card.component';
 import { CommonModule } from '@angular/common';
 import { ModalCreateComponent } from './views/dashboard/components/modal-create/modal-create.component';
+import { NotificationComponent } from './views/shared/notification/notification.component';
 
 @NgModule({
-  declarations: [AppComponent, LoginComponent, RegisterComponent, DashboardComponent, ModalCreateComponent],
+  declarations: [AppComponent, LoginComponent, RegisterComponent, DashboardComponent, ModalCreateComponent, NotificationComponent],
   imports: [FormsModule, BrowserModule, AppRoutingModule, ReactiveFormsModule, ProjectCardComponent, CommonModule, HttpClientModule],
   providers: [
     {

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ProjectService } from '../../../../services/project.service';
 
 @Component({
   selector: 'app-modal-create',
@@ -11,7 +12,7 @@ export class ModalCreateComponent implements OnInit {
   public projectForm!: FormGroup;
   public states: string[] = ["Completado", "En progreso", "Pendiente"];
 
-  constructor(private fb: FormBuilder) {}
+  constructor(private readonly fb: FormBuilder, private readonly projectService: ProjectService) { }
 
   ngOnInit(): void {
     this.projectForm = this.fb.group({
@@ -30,7 +31,15 @@ export class ModalCreateComponent implements OnInit {
     }
 
     const { name, description, state, startDate, endDate } = this.projectForm.value;
-    console.log('Proyecto creado:', { name, description, state, startDate, endDate });
+
+    this.projectService.createProject({
+      title: name,
+      description,
+      start_date: startDate,
+      delivery_date: endDate,
+      status: state
+    }).subscribe({});
+    // console.log('Proyecto creado:', { name, description, state, startDate, endDate });
   }
 
   isFieldInvalid(field: string): boolean {

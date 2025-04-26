@@ -1,9 +1,8 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { map, Observable } from 'rxjs';
 import { environment } from '../../environment';
-import { ILoginResponse } from '../interfaces/responses/login.response.interface';
-import { IUser } from '../interfaces/entities/user.interface';
+import { ILoginResponse, IUser } from '../models/user.interface';
 
 @Injectable({
   providedIn: 'root'

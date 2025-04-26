@@ -1,4 +1,8 @@
-import { IUser } from "../entities/user.interface";
+export interface IUser {
+    id:    number;
+    name:  string;
+    email: string;
+}
 
 export interface ILoginResponse {
     message: string;

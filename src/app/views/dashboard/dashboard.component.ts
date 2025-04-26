@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { IProject } from '../../interfaces/entities/project.interface';
 import { ProjectService } from '../../services/project.service';
+import { IProject } from '../../models/projects.interface';
 
 @Component({
   selector: 'app-dashboard',
@@ -11,7 +11,7 @@ import { ProjectService } from '../../services/project.service';
 export class DashboardComponent implements OnInit {
   public projects: IProject[] = [];
 
-  constructor(private projectService: ProjectService) {}
+  constructor(private readonly projectService: ProjectService) {}
 
   ngOnInit(): void {
     this.projectService.getProjects().subscribe({
