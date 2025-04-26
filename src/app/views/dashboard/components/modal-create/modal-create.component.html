@@ -1,0 +1,90 @@
+<section class="p-6 bg-gray-900 rounded-lg shadow-md absolute top-50 left-50 transform -translate-x-1/2 -translate-y-1/2">
+  <h3 class="text-xl font-bold text-white mb-4">Crear Nuevo Proyecto</h3>
+  <form [formGroup]="projectForm" (ngSubmit)="onSubmit()" class="space-y-4">
+    <div class="form-group">
+      <label for="name" class="block text-sm font-medium text-white">Nombre del Proyecto</label>
+      <input
+        type="text"
+        id="name"
+        formControlName="name"
+        [class.is-invalid]="isFieldInvalid('name')"
+        class="mt-1 block w-full px-3 py-2 border border-gray-700 rounded-md shadow-sm bg-gray-800 text-white focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+        required
+      />
+      <div *ngIf="isFieldInvalid('name')" class="text-red-500 text-sm mt-1">
+        El nombre es obligatorio y debe tener al menos 3 caracteres.
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="description" class="block text-sm font-medium text-white">Descripción</label>
+      <textarea
+        id="description"
+        formControlName="description"
+        [class.is-invalid]="isFieldInvalid('description')"
+        class="mt-1 block w-full px-3 py-2 border border-gray-700 rounded-md shadow-sm bg-gray-800 text-white focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+        required
+      ></textarea>
+      <div *ngIf="isFieldInvalid('description')" class="text-red-500 text-sm mt-1">
+        La descripción es obligatoria y debe tener al menos 10 caracteres.
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="state" class="block text-sm font-medium text-white">Estado</label>
+      <select
+        id="state"
+        formControlName="state"
+        [class.is-invalid]="isFieldInvalid('state')"
+        class="mt-1 block w-full px-3 py-2 border border-gray-700 rounded-md shadow-sm bg-gray-800 text-white focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+        required
+      >
+        <option value="" disabled>Seleccione un estado</option>
+        <option *ngFor="let state of states" [value]="state">
+          {{ state }}
+        </option>
+      </select>
+      <div *ngIf="isFieldInvalid('state')" class="text-red-500 text-sm mt-1">
+        El estado es obligatorio.
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="startDate" class="block text-sm font-medium text-white">Fecha de Inicio</label>
+      <input
+        type="date"
+        id="startDate"
+        formControlName="startDate"
+        [class.is-invalid]="isFieldInvalid('startDate')"
+        class="mt-1 block w-full px-3 py-2 border border-gray-700 rounded-md shadow-sm bg-gray-800 text-white focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+        required
+      />
+      <div *ngIf="isFieldInvalid('startDate')" class="text-red-500 text-sm mt-1">
+        La fecha de inicio es obligatoria.
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="endDate" class="block text-sm font-medium text-white">Fecha de Finalización</label>
+      <input
+        type="date"
+        id="endDate"
+        formControlName="endDate"
+        [class.is-invalid]="isFieldInvalid('endDate')"
+        class="mt-1 block w-full px-3 py-2 border border-gray-700 rounded-md shadow-sm bg-gray-800 text-white focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+        required
+      />
+      <div *ngIf="isFieldInvalid('endDate')" class="text-red-500 text-sm mt-1">
+        La fecha de finalización es obligatoria.
+      </div>
+    </div>
+
+    <button
+      type="submit"
+      [disabled]="projectForm.invalid"
+      class="w-full bg-indigo-600 text-white py-2 px-4 rounded-md shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+    >
+      Crear Proyecto
+    </button>
+  </form>
+</section>

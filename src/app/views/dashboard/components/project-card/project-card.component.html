@@ -1,0 +1,17 @@
+<div class="bg-white shadow-md rounded-2xl p-4 w-80 border border-gray-200">
+  <div class="flex justify-between items-center mb-2">
+    <h2 class="text-lg font-bold text-gray-800">{{ title }}</h2>
+    <span
+      class="text-xs px-2 py-1 rounded-md font-semibold"
+      [ngClass]="getStatusClasses()"
+    >
+      {{ status }}
+    </span>
+  </div>
+
+  <p class="text-sm text-gray-600 mb-4">{{ description }}</p>
+
+  <div class="text-xs text-right text-gray-500">
+    Entrega: {{ delivery_date | date : "shortDate" }}
+  </div>
+</div>

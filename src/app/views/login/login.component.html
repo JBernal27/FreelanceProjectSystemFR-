@@ -1,0 +1,21 @@
+<main class="h-screen flex flex-col justify-center items-center gap-8">
+    <section class="border-gray-200 rounded-3xl border-2 p-6">
+        <h1 class="text-5xl font-bold text-center mb-10">Login</h1>
+        <form class="flex flex-col gap-2 w-xs" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+            <input type="email" name="email" placeholder="Email" formControlName="email">
+            <ul *ngIf="loginForm.get('email')?.touched && loginForm.get('email')?.errors" class="text-red-500 text-sm">
+                <li class="list-disc ml-4" *ngIf="loginForm.get('email')?.errors?.['required']">Email is required.</li>
+                <li class="list-disc ml-4" *ngIf="loginForm.get('email')?.errors?.['email']">Please enter a valid email.</li>
+            </ul>
+
+            <input type="password" name="password" placeholder="Password" formControlName="password">
+            <ul *ngIf="loginForm.get('password')?.touched && loginForm.get('password')?.errors" class="text-red-500 text-sm">
+                <li class="list-disc ml-4" *ngIf="loginForm.get('password')?.errors?.['required']">Password is required.</li>
+                <li class="list-disc ml-4" *ngIf="loginForm.get('password')?.errors?.['minlength']">Password must be at least 6 characters long.</li>
+            </ul>
+
+            <a class="text-blue-500 text-sm my-2.5 max-w-2" href="register">Register</a>
+            <input type="submit" value="Login">
+        </form>
+    </section>
+</main>

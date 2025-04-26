@@ -1,0 +1,29 @@
+<main class="p-5">
+  <section>
+    <h1 class="text-5xl font-bold text-center mb-10">Mis Proyectos</h1>
+    <p class="text-center text-gray-400">
+      Aquí puedes ver todos los proyectos que has creado. Puedes crear nuevos
+      proyectos, editarlos o eliminarlos según sea necesario.
+    </p>
+  </section>
+  <section class="absolute top-0 right-0 m-5">
+    <button
+      class="bg-green-600 text-white px-4 py-2 rounded-lg shadow-md hover:bg-green-500 transition duration-200"
+    >
+      Crear Proyecto
+    </button>
+  </section>
+  <section class="p-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+    <app-project-card
+      *ngFor="let project of projects"
+      [title]="project.title"
+      [description]="project.description"
+      [status]="project.status"
+      [delivery_date]="
+        (project.delivery_date | date : 'shortDate') ?? 'No date available'
+      "
+    >
+    </app-project-card>
+  </section>
+  <app-modal-create></app-modal-create>
+</main>
