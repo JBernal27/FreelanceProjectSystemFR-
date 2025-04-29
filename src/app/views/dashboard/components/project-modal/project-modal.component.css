@@ -1,0 +1,7 @@
+.transparent-input {
+    background-color: transparent !important;
+    color: white !important;
+    border-color: transparent !important;
+    pointer-events: none; /* Evita la interacción */
+    padding: 0;
+  }

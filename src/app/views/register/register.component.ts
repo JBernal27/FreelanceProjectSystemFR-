@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
+import { NotificationService } from '../../services/notification.service';
+import { LoaderService } from '../../services/loader.service';
 
 @Component({
   selector: 'app-register',
@@ -15,7 +17,9 @@ export class RegisterComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private authService: AuthService,
-    private router: Router
+    private router: Router,
+    private readonly notificationService: NotificationService,
+    private readonly loaderService: LoaderService
   ) {}
 
   ngOnInit(): void {
@@ -43,15 +47,26 @@ export class RegisterComponent implements OnInit {
 
     const { username, email, password } = this.registerForm.value;
 
+    this.loaderService.showLoader();
     this.authService.register(username, email, password).subscribe({
       next: (success) => {
+        this.loaderService.hideLoader();
         if (success) {
           console.log('Registro exitoso');
           this.router.navigate(['/login']);
+          this.notificationService.showNotification({
+            title: 'Registro exitoso',
+            type: 'completed',
+          });
         }
       },
       error: (err) => {
+        this.loaderService.hideLoader();
         console.error('Error en el registro:', err);
+        this.notificationService.showNotification({
+          title: 'Error al completar el registro',
+          type: 'error',
+        });
       },
     });
   }

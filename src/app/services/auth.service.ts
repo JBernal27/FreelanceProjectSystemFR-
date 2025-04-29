@@ -5,15 +5,16 @@ import { environment } from '../../environment';
 import { ILoginResponse, IUser } from '../models/user.interface';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class AuthService {
-
   private readonly baseUrl: string = `${environment.apiBaseUrl}/auth`;
 
-  constructor(
-    private readonly http: HttpClient
-  ) { }
+  constructor(private readonly http: HttpClient) {}
+
+  isLoggedIn(): boolean {
+    return !!localStorage.getItem('authToken');
+  }
 
   login(email: string, password: string): Observable<IUser> {
     const body = { email, password };
@@ -37,14 +38,23 @@ export class AuthService {
   register(name: string, email: string, password: string): Observable<boolean> {
     const body = { name, email, password };
 
-    return this.http.post(`${this.baseUrl}/register`, body, { observe: 'response' }).pipe(
-      map((response) => {
-        if (response.status === 201) {
-          return true;
-        } else {
-          throw new Error('Registration failed: Unexpected response status');
-        }
-      })
-    );
+    return this.http
+      .post(`${this.baseUrl}/register`, body, { observe: 'response' })
+      .pipe(
+        map((response) => {
+          if (response.status === 201) {
+            return true;
+          } else {
+            throw new Error('Registration failed: Unexpected response status');
+          }
+        })
+      );
+  }
+
+  logout(): void {
+    localStorage.removeItem('authToken');
+    localStorage.removeItem('userId');
+    localStorage.removeItem('userName');
+    localStorage.removeItem('userEmail');
   }
 }

@@ -12,9 +12,11 @@ import { ProjectCardComponent } from './views/dashboard/components/project-card/
 import { CommonModule } from '@angular/common';
 import { ModalCreateComponent } from './views/dashboard/components/modal-create/modal-create.component';
 import { NotificationComponent } from './views/shared/notification/notification.component';
+import { LoaderComponent } from './views/shared/loader/loader.component';
+import { ProjectModalComponent } from './views/dashboard/components/project-modal/project-modal.component';
 
 @NgModule({
-  declarations: [AppComponent, LoginComponent, RegisterComponent, DashboardComponent, ModalCreateComponent, NotificationComponent],
+  declarations: [AppComponent, LoginComponent, RegisterComponent, DashboardComponent, ModalCreateComponent, NotificationComponent, LoaderComponent, ProjectModalComponent],
   imports: [FormsModule, BrowserModule, AppRoutingModule, ReactiveFormsModule, ProjectCardComponent, CommonModule, HttpClientModule],
   providers: [
     {

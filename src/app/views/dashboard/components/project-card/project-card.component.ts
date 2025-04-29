@@ -1,5 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { IProject } from '../../../../models/projects.interface';
+import { ProjectService } from '../../../../services/project.service';
 
 @Component({
   selector: 'app-project-card',
@@ -8,13 +10,14 @@ import { CommonModule } from '@angular/common';
   imports: [CommonModule],
 })
 export class ProjectCardComponent {
-  @Input() title!: string;
-  @Input() description!: string;
-  @Input() status!: string;
-  @Input() delivery_date!: string | null;
+  @Input() project!: IProject
+
+  constructor(
+    private readonly projectService: ProjectService,
+  ) {}
 
   getStatusClasses(): string {
-    switch (this.status) {
+    switch (this.project.status) {
       case 'Completado':
         return 'bg-green-100 text-green-800';
       case 'En progreso':
@@ -24,5 +27,9 @@ export class ProjectCardComponent {
       default:
         return 'bg-gray-100 text-gray-800';
     }
+  }
+
+  setProjectInformation(): void {
+    this.projectService.loadProjectCardInformation(this.project);
   }
 }
